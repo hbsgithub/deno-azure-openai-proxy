@@ -1,11 +1,11 @@
 # deno-azure-openai-proxy
 
-This is an Azure OpenAI proxy deployed on Deno Deploy.
-
-Supports custom secondary domains or domain binding.
-
-Supports typewriter mode for streaming response.
-
+No server needed, free to use. This is an Azure OpenAI proxy deployed on Deno Deploy.
+## Features
+1. Compared to Cloudflare Workers, it can be used directly without a proxy.
+2. Support for custom second-level domain names (*.deno.dev) or binding your own domain name.
+3. Support for typewriter mode of streaming responses.
+4. No server required, free online deployment, with a monthly limit of 100,000 requests.
 # Deployment Method
 
 1. Visit https://dash.deno.com/ and register and log in.
@@ -22,7 +22,8 @@ Supports typewriter mode for streaming response.
 # Usage
 
 Fill in your custom secondary domain or bound domain in the GPT API project you're using, and fill in your own Azure OpenAI key in the API key field to use.
-
+# Remarks
+If you have any questions, please feel free to raise an issue. If you find this project helpful, we welcome your star!
 # Acknowledgements
 
 Inspired by https://github.com/haibbo/cf-openai-azure-proxy
