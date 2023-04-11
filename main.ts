@@ -1,85 +1,84 @@
+import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
+
 // The name of your Azure OpenAI Resource.
-const resourceName="your-resource-name"
+const resourceName:string = "your-resource-name";
 
 // The deployment name you chose when you deployed the model.
-const deployName="deployment-name"
+const deployName:string = "deployment-name";
 
-const apiVersion="2023-03-15-preview"
+const apiVersion:string = "2023-03-15-preview";
 
-
-addEventListener("fetch", (event) => {
-  event.respondWith(handleRequest(event.request));
-});
-
-async function handleRequest(request) {
+async function handleRequest(request:Request):Promise<Response> {
   if (request.method === 'OPTIONS') {
     return handleOPTIONS(request)
   }
 
   const url = new URL(request.url);
+  let path:string;
   if (url.pathname === '/v1/chat/completions') {
-    var path="chat/completions"
+    path="chat/completions"
   } else if (url.pathname === '/v1/completions') {
-    var path="completions"
+    path="completions"
   } else if (url.pathname === '/v1/models') {
     return handleModels(request)
   } else {
     return new Response('404 Not Found', { status: 404 })
   }
  
-  const fetchAPI = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`
-  let body;
+  const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
+  let body:any;
   if (request.method === 'POST') {
     body = await request.json();
   }
-  const authKey = request.headers.get('Authorization');
+  const authKey:string|null = request.headers.get('Authorization');
   if (!authKey) {
-    return new Response("Not allowed", {
-      status: 403
-    });
+    return new Response("Not allowed", {status: 403});
   }
 
-  const payload = {
+  const payload:RequestInit = {
     method: request.method,
     headers: {
       "Content-Type": "application/json",
       "api-key": authKey.replace('Bearer ', ''),
     },
-    body: typeof body === 'object' ? JSON.stringify(body) : '{}',
+    body: JSON.stringify(body),
   };
 
-  let { readable, writable } = new TransformStream()
-  const response = await fetch(fetchAPI, payload);
-  stream(response.body, writable);
-  return new Response(readable, response);
+  const { readable, writable } = new TransformStream();
+  const response:Response = await fetch(fetchAPI, payload);
+  if (response.body) {
+    stream(response.body, writable);
+    return new Response(readable, response);
+  } else {
+    throw new Error('Response body is null');
+}
 
 }
 
-function sleep(ms) {
+function sleep(ms:number):Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // support printer mode and add newline
-async function stream(readable, writable) {
+async function stream(readable:ReadableStream<Uint8Array>, writable:WritableStream<Uint8Array>):Promise<void> {
   const reader = readable.getReader();
   const writer = writable.getWriter();
 
-  // const decoder = new TextDecoder();
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
-// let decodedValue = decoder.decode(value);
+
   const newline = "\n";
-  const delimiter = "\n\n"
+  const delimiter = "\n\n";
   const encodedNewline = encoder.encode(newline);
 
   let buffer = "";
   while (true) {
-    let { value, done } = await reader.read();
+    const { value, done } = await reader.read();
     if (done) {
       break;
     }
     buffer += decoder.decode(value, { stream: true }); // stream: true is important here,fix the bug of incomplete line
-    let lines = buffer.split(delimiter);
+    const lines = buffer.split(delimiter);
 
     // Loop through all but the last line, which may be incomplete.
     for (let i = 0; i < lines.length - 1; i++) {
@@ -97,8 +96,8 @@ async function stream(readable, writable) {
   await writer.close();
 }
 
-async function handleModels(request) {
-  const data = {
+async function handleModels(request:Request):Promise<Response> {
+  const data:any = {
     "object": "list",
     "data": [ {
       "id": "gpt-3.5-turbo",
@@ -123,13 +122,13 @@ async function handleModels(request) {
       "parent": null
     }]
   };
-  const json = JSON.stringify(data, null, 2);
+  const json:string = JSON.stringify(data, null, 2);
   return new Response(json, {
     headers: { 'Content-Type': 'application/json' },
   });
 }
 
-async function handleOPTIONS(request) {
+function handleOPTIONS(request:Request):Response {
     return new Response(null, {
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -138,3 +137,4 @@ async function handleOPTIONS(request) {
       }
     })
 }
+serve(handleRequest);
