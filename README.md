@@ -2,8 +2,11 @@
  **[English](https://github.com/hbsgithub/deno-azure-openai-proxy/blob/main/README_en.md)**
 
 部署在deno deploy上的azure openai 代理
+
 相比于使用cloudflare workers可以直连使用
+
 支持自定义二级域名或者绑定自己的域名
+
 支持打字机模式的流式响应
 # 部署方法
 1. 访问https://dash.deno.com/并注册登录

@@ -1,8 +1,10 @@
 # deno-azure-openai-proxy
 
 This is an Azure OpenAI proxy deployed on Deno Deploy.
-It supports custom secondary domains or domain binding.
-It supports typewriter mode for streaming response.
+
+Supports custom secondary domains or domain binding.
+
+Supports typewriter mode for streaming response.
 
 # Deployment Method
 
