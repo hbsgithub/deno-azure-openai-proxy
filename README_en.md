@@ -11,6 +11,8 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 3. Support for typewriter mode of streaming responses.
 4. Supports mapper, which allows for custom model mapping rules，also supports directly passing through the model name.
 5. No server required, free online deployment, with a monthly limit of 100,000 requests.
+# Update
+- 23.4.12 Updated support for mapper model mapping rules
 # Deployment Method
 
 1. Visit https://dash.deno.com/ and register and log in (you can directly use your GitHub account).
