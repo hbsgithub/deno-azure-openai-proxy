@@ -32,8 +32,8 @@
    ```
    其他的map规则直接按这样的格式续写即可
 
-1. 点击save and deploy进行保存并部署
-2. 返回到project的settings中自定义自己的二级域名或者绑定自己的域名
+6. 点击save and deploy进行保存并部署
+7. 返回到project的settings中自定义自己的二级域名或者绑定自己的域名
 # 使用方法
 将自己自定义的二级域名或绑定的自定义域名填写到自己所使用的gpt项目的api url中，选择设定过mapper的模型，并在api key 中填写自己的azure openai key即可使用。
 ## License

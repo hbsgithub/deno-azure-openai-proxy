@@ -31,8 +31,8 @@ const mapper:any = {
 ```
    Other map rules can be continued directly in this format.
    
-1. Click "save and deploy" to save and deploy the project.
-2. Customize your own secondary domain or bind your own domain in the project settings.
+6. Click "save and deploy" to save and deploy the project.
+7. Customize your own secondary domain or bind your own domain in the project settings.
 
 # Usage
 
