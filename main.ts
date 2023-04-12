@@ -2,15 +2,13 @@ import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 
 // The name of your Azure OpenAI Resource.
 const resourceName:string = "your-resource-name";
-
-// The deployment name you chose when you deployed the model.
-// const deployName:string = "deployment-name";
-
+// The version of OpenAI API.
 const apiVersion:string = "2023-03-15-preview";
-  // 自定义 mapper 来映射 model 字段
+// The mapping of model name.
 const mapper:any = {
-  'gpt-3.5-turbo': 'gpt35'
-  // 其他映射规则可以在这里添加
+  'gpt-3.5-turbo': 'gpt35',
+  'gpt-4': 'gpt4' 
+  // Other mapping rules can be added here.
 };
 
 async function handleRequest(request:Request):Promise<Response> {
@@ -31,7 +29,7 @@ async function handleRequest(request:Request):Promise<Response> {
   }
 
 
-  // 获取 model 字段的值，并进行映射
+  // Get the value of the model field and perform mapping.
   let deployName:string = '';
   let body:any;
   if (request.method === 'POST') {
