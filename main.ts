@@ -4,9 +4,14 @@ import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 const resourceName:string = "your-resource-name";
 
 // The deployment name you chose when you deployed the model.
-const deployName:string = "deployment-name";
+// const deployName:string = "deployment-name";
 
 const apiVersion:string = "2023-03-15-preview";
+  // 自定义 mapper 来映射 model 字段
+const mapper:any = {
+  'gpt-3.5-turbo': 'gpt35'
+  // 其他映射规则可以在这里添加
+};
 
 async function handleRequest(request:Request):Promise<Response> {
   if (request.method === 'OPTIONS') {
@@ -24,12 +29,25 @@ async function handleRequest(request:Request):Promise<Response> {
   } else {
     return new Response('404 Not Found', { status: 404 })
   }
- 
-  const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
+
+
+  // 获取 model 字段的值，并进行映射
+  let deployName:string = '';
   let body:any;
   if (request.method === 'POST') {
     body = await request.json();
+    const modelName:string|undefined = body?.model;
+    if (modelName) {
+      deployName = mapper[modelName] || modelName;
+    }
   }
+ 
+  const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
+  
+  // let body:any;
+  // if (request.method === 'POST') {
+  //   body = await request.json();
+  // }
   const authKey:string|null = request.headers.get('Authorization');
   if (!authKey) {
     return new Response("Not allowed", {status: 403});
@@ -54,6 +72,7 @@ async function handleRequest(request:Request):Promise<Response> {
 }
 
 }
+
 
 function sleep(ms:number):Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
