@@ -41,11 +41,7 @@ async function handleRequest(request:Request):Promise<Response> {
   }
  
   const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
-  
-  // let body:any;
-  // if (request.method === 'POST') {
-  //   body = await request.json();
-  // }
+
   const authKey:string|null = request.headers.get('Authorization');
   if (!authKey) {
     return new Response("Not allowed", {status: 403});
