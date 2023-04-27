@@ -12,6 +12,7 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 4. Supports mapper, which allows for custom model mapping rules，also supports directly passing through the model name.
 5. No server required, free online deployment, with a monthly limit of 100,000 requests.
 # Update
+- 23.4.27 Update supports setting the values of resourceName and mapper through environment variables.
 - 23.4.12 Updated support for mapper model mapping rules
 # Deployment Method
 
@@ -19,20 +20,23 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 2. Click "New Project" to create a new project.
 3. Click "play" on the right side of the code editor to enter edit mode.
 4. Copy and paste the contents of [main.ts](https://github.com/hbsgithub/deno-azure-openai-proxy/blob/main/main.ts) from this repository into the editor.
-5. Modify the corresponding "resourceName" and "mapper".
+5. Adjust the values of resourceName and mapper directly by modifying them or through environment variables.
 
-![img](https://user-images.githubusercontent.com/1295315/229705215-e0556c99-957f-4d98-99a6-1c51254110b9.png)
-**Mapper configuration example**: If you have deployed the GPT-3.5 Turbo and GPT-4 models on Azure with deployment names 'gpt35' and 'gpt4', respectively, then the mapper should be configured as follows.
-```
-const mapper:any = {
-  'gpt-3.5-turbo': 'gpt35',
-  'gpt-4': 'gpt4' 
-};
-```
+![img](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
+- **Mapper configuration example**: If you have deployed the GPT-3.5 Turbo and GPT-4 models on Azure with deployment names 'gpt35' and 'gpt4', respectively, then the mapper should be configured as follows.
+  ```
+  const mapper:any = {
+    'gpt-3.5-turbo': 'gpt35',
+    'gpt-4': 'gpt4' 
+  };
+  ```
    Other map rules can be continued directly in this format.
-   
-6. Click "save and deploy" to save and deploy the project.
-7. Customize your own secondary domain or bind your own domain in the project settings.
+
+- Method for setting environment variables
+  Click on Add Variable in the Environment Variables section of the project's settings.
+       ![img2](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
+1. Click "save and deploy" to save and deploy the project.
+2. Customize your own secondary domain or bind your own domain in the project settings.
 
 # Usage
 

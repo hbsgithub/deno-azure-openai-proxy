@@ -1,13 +1,13 @@
 import { serve } from "https://deno.land/std@0.181.0/http/server.ts";
 
 // The name of your Azure OpenAI Resource.
-const resourceName:string = "your-resource-name";
+const resourceName:string = Deno.env.get("RESOURCE_NAME");
 // The version of OpenAI API.
 const apiVersion:string = "2023-03-15-preview";
 // The mapping of model name.
 const mapper:any = {
-  'gpt-3.5-turbo': 'gpt35',
-  'gpt-4': 'gpt4' 
+  'gpt-3.5-turbo': Deno.env.get("DEPLOY_NAME_GPT35"),
+  'gpt-4': Deno.env.get("DEPLOY_NAME_GPT4") 
   // Other mapping rules can be added here.
 };
 
@@ -34,12 +34,14 @@ async function handleRequest(request:Request):Promise<Response> {
   let body:any;
   if (request.method === 'POST') {
     body = await request.json();
-    const modelName:string|undefined = body?.model;
-    if (modelName) {
-      deployName = mapper[modelName] || modelName;
-    }
   }
- 
+
+  const modelName:string = body?.model;
+
+  if (modelName) {
+    deployName = mapper[modelName] || modelName;
+  }
+
   const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
 
   const authKey:string|null = request.headers.get('Authorization');
@@ -56,8 +58,15 @@ async function handleRequest(request:Request):Promise<Response> {
     body: JSON.stringify(body),
   };
 
-  const { readable, writable } = new TransformStream();
   const response:Response = await fetch(fetchAPI, payload);
+
+  // Since Azure has fixed gpt-3's printer effect, do not have to stream it.
+  if (modelName.startsWith('gpt-3') || body?.stream != true){
+    return response
+  } 
+
+  const { readable, writable } = new TransformStream();
+  
   if (response.body) {
     stream(response.body, writable);
     return new Response(readable, response);
@@ -96,7 +105,7 @@ async function stream(readable:ReadableStream<Uint8Array>, writable:WritableStre
     // Loop through all but the last line, which may be incomplete.
     for (let i = 0; i < lines.length - 1; i++) {
       await writer.write(encoder.encode(lines[i] + delimiter));
-      await sleep(30);
+      await sleep(50);
     }
 
     buffer = lines[lines.length - 1];
@@ -112,8 +121,12 @@ async function stream(readable:ReadableStream<Uint8Array>, writable:WritableStre
 async function handleModels(request:Request):Promise<Response> {
   const data:any = {
     "object": "list",
-    "data": [ {
-      "id": "gpt-3.5-turbo",
+    "data": []  
+  };
+
+  for (let key in mapper) {
+    data.data.push({
+      "id": key,
       "object": "model",
       "created": 1677610602,
       "owned_by": "openai",
@@ -131,10 +144,11 @@ async function handleModels(request:Request):Promise<Response> {
         "group": null,
         "is_blocking": false
       }],
-      "root": "gpt-3.5-turbo",
+      "root": key,
       "parent": null
-    }]
-  };
+    });  
+  }
+
   const json:string = JSON.stringify(data, null, 2);
   return new Response(json, {
     headers: { 'Content-Type': 'application/json' },
