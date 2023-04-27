@@ -35,7 +35,7 @@
    - 环境变量设置方法
      
      在project的setting中的Environment Variables点击Add Variable
-     ![部署方法](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
+     ![部署方法](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/Environment%20Variables.png)
 
 1. 点击save and deploy进行保存并部署
 2. 返回到project的settings中自定义自己的二级域名或者绑定自己的域名

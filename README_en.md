@@ -34,7 +34,7 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 
 - Method for setting environment variables
   Click on Add Variable in the Environment Variables section of the project's settings.
-       ![img2](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
+       ![img2](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/Environment%20Variables.png)
 1. Click "save and deploy" to save and deploy the project.
 2. Customize your own secondary domain or bind your own domain in the project settings.
 
