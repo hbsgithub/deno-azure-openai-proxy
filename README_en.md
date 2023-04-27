@@ -23,7 +23,7 @@ Without modifying the source code being copied, Click on Add Variable in the Env
 ![img](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
 3. Customize your own subdomain or bind your own domain in the settings of the project.
 ![custom](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/custom%20url.png)
-# Deployment Method
+# Manual deployment method
 
 1. Visit https://dash.deno.com/ and register and log in (you can directly use your GitHub account).
 2. Click "New Project" to create a new project.
