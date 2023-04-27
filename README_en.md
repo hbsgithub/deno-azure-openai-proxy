@@ -15,7 +15,7 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 - 23.4.27 Update support for setting the values of resourceName and mapper through environment variables, as well as support for one-click deployment.
 - 23.4.12 Updated support for mapper model mapping rules
 # One-click deployment
-1. Click [Deploy on Deno](https://dash.deno.com/new?url=https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/main.ts)
+1. Click [Deploy on Deno](https://dash.deno.com/new?url=https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/main.ts)(For the first click, you need to log in to Deno Deploy. After logging in, click this link again to proceed with deployment.)
 2. After deployment, set the environment variables.
 - Method for setting environment variables
 Without modifying the source code being copied, Click on Add Variable in the Environment Variables section of the project's settings.

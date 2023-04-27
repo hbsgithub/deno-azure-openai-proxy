@@ -17,7 +17,7 @@
 - 23.4.27 更新支持环境变量设置resourceName和mapper的值以及支持一键部署
 - 23.4.12 更新支持mapper模型映射规则
 # 一键部署
-1. 点击 [Deploy on Deno](https://dash.deno.com/new?url=https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/main.ts)
+1. 点击 [Deploy on Deno](https://dash.deno.com/new?url=https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/main.ts)（首次点击要先登录Deno Deploy，登录完成之后重新点击这个链接即可进行部署）
 2. 部署完成后设置环境变量
 - 环境变量设置方法
   
