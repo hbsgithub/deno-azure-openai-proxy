@@ -14,7 +14,7 @@
 4. 支持mapper，可以自定义模型映射规则，也支持直接透传模型名
 5. 无需服务器，免费在线部署，每月10万次请求额度
 # 更新
-- 23.4.27 更新支持环境变量设置 resourceName 和 mapper 的值
+- 23.4.27 更新支持环境变量设置resourceName和mapper的值
 - 23.4.12 更新支持mapper模型映射规则
 # 部署方法
 1. 访问 https://dash.deno.com 并注册登录（可以直接使用github账号）
