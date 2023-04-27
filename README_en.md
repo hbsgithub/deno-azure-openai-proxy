@@ -11,7 +11,7 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 3. Support for custom second-level domain names (*.deno.dev) or binding your own domain name.
 4. Support for typewriter mode of streaming responses.
 5. Supports mapper, which allows for custom model mapping rules，also supports directly passing through the model name.
-6. No server required, free online deployment, with a monthly limit of 100,000 requests.
+6. No server required, free online deployment, with a daily limit of 100,000 requests.
 # Update
 - 23.4.27 Update support for setting the values of resourceName and mapper through environment variables, as well as support for one-click deployment.
 - 23.4.12 Updated support for mapper model mapping rules
