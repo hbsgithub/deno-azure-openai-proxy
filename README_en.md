@@ -12,8 +12,17 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 4. Supports mapper, which allows for custom model mapping rules，also supports directly passing through the model name.
 5. No server required, free online deployment, with a monthly limit of 100,000 requests.
 # Update
-- 23.4.27 Update supports setting the values of resourceName and mapper through environment variables.
+- 23.4.27 Update support for setting the values of resourceName and mapper through environment variables, as well as support for one-click deployment.
 - 23.4.12 Updated support for mapper model mapping rules
+# One-click deployment
+1. Click [Deploy on Deno](https://dash.deno.com/new?url=https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/main.ts)
+2. After deployment, set the environment variables.
+- Method for setting environment variables
+Without modifying the source code being copied, Click on Add Variable in the Environment Variables section of the project's settings.
+![img2](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/Environment%20Variables.png)
+![img](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
+3. Customize your own subdomain or bind your own domain in the settings of the project.
+![custom](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/custom%20url.png)
 # Deployment Method
 
 1. Visit https://dash.deno.com/ and register and log in (you can directly use your GitHub account).
@@ -22,7 +31,6 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 4. Copy and paste the contents of [main.ts](https://github.com/hbsgithub/deno-azure-openai-proxy/blob/main/main.ts) from this repository into the editor.
 5. Adjust the values of resourceName and mapper directly by modifying them or through environment variables.
 
-![img](https://user-images.githubusercontent.com/1295315/233124125-1ea95665-ffab-4b5c-a7ba-26f31f1bb0b3.png)
 - **Mapper configuration example**: If you have deployed the GPT-3.5 Turbo and GPT-4 models on Azure with deployment names 'gpt35' and 'gpt4', respectively, then the mapper should be configured as follows.
   ```
   const mapper:any = {
@@ -32,15 +40,13 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
   ```
    Other map rules can be continued directly in this format.
 
-- Method for setting environment variables
-  Without modifying the source code being copied, Click on Add Variable in the Environment Variables section of the project's settings.
-       ![img2](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/Environment%20Variables.png)
+
 1. Click "save and deploy" to save and deploy the project.
 2. Customize your own secondary domain or bind your own domain in the project settings.
 
 # Usage
 
-Fill in your custom secondary domain or bound domain in the GPT API project you're using, select a model that has been set up with a mapper and fill in your own Azure OpenAI key in the API key field to use.
+Fill in your custom subdomain or bound domain in the GPT API project you're using, select a model that has been set up with a mapper and fill in your own Azure OpenAI key in the API key field to use.
 ## License
 MIT
 # Remarks
