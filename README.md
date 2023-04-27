@@ -34,7 +34,7 @@
      其他的map规则直接按这样的格式续写即可
    - 环境变量设置方法
      
-     在project的setting中的Environment Variables点击Add Variable
+     在不修改复制的源代码的情况下，在project的setting中的Environment Variables点击Add Variable
      ![部署方法](https://raw.githubusercontent.com/hbsgithub/deno-azure-openai-proxy/main/img/Environment%20Variables.png)
 
 1. 点击save and deploy进行保存并部署
