@@ -60,8 +60,7 @@ async function handleRequest(request:Request):Promise<Response> {
 
   const response:Response = await fetch(fetchAPI, payload);
 
-  // Since Azure has fixed gpt-3's printer effect, do not have to stream it.
-  if (modelName.startsWith('gpt-3') || body?.stream != true){
+  if (body?.stream != true){
     return response
   } 
 
@@ -105,7 +104,7 @@ async function stream(readable:ReadableStream<Uint8Array>, writable:WritableStre
     // Loop through all but the last line, which may be incomplete.
     for (let i = 0; i < lines.length - 1; i++) {
       await writer.write(encoder.encode(lines[i] + delimiter));
-      await sleep(50);
+      await sleep(30);
     }
 
     buffer = lines[lines.length - 1];
