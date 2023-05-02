@@ -128,7 +128,7 @@ async function handleEmbedding(request: Request, path: string) {
       return await requestAzure(request.method, body, path, key);
   } else if (Array.isArray(input)) {
       const resps = pooledMap(3,
-          input, x => {
+          input, (x: any) => {
               return requestAzure(request.method, { ...body, input: x }, path, key);
           });
       const retbody = {
