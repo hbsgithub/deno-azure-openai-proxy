@@ -4,7 +4,7 @@ import { pooledMap } from "https://deno.land/std@0.182.0/async/pool.ts";
 // The name of your Azure OpenAI Resource.
 const resourceName:string = Deno.env.get("RESOURCE_NAME");
 // The version of OpenAI API.
-const apiVersion:string = "2023-03-15-preview";
+const apiVersion:string = "2023-05-15";
 // The mapping of model name.
 const mapper:any = {
   'gpt-3.5-turbo': Deno.env.get("DEPLOY_NAME_GPT35"),
@@ -18,6 +18,9 @@ async function handleRequest(request:Request):Promise<Response> {
   }
 
   const url = new URL(request.url);
+  if (url.pathname.startsWith("//")) {
+    url.pathname = url.pathname.replace('/',"")
+  }
   let path:string;
   if (url.pathname === '/v1/chat/completions') {
     return handleDirect(request, "chat/completions");
@@ -102,7 +105,7 @@ async function stream(readable:ReadableStream<Uint8Array>, writable:WritableStre
     // Loop through all but the last line, which may be incomplete.
     for (let i = 0; i < lines.length - 1; i++) {
       await writer.write(encoder.encode(lines[i] + delimiter));
-      await sleep(30);
+      await sleep(20);
     }
 
     buffer = lines[lines.length - 1];
