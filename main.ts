@@ -18,6 +18,9 @@ async function handleRequest(request:Request):Promise<Response> {
   }
 
   const url = new URL(request.url);
+  if (url.pathname.startsWith("//")) {
+    url.pathname = url.pathname.replace('/',"")
+  }
   let path:string;
   if (url.pathname === '/v1/chat/completions') {
     return handleDirect(request, "chat/completions");
