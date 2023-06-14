@@ -13,6 +13,7 @@ A proxy tool deployed on Deno Deploy that can convert an OpenAI request into an 
 5. Supports mapper, which allows for custom model mapping rules，also supports directly passing through the model name.
 6. No server required, free online deployment, with a daily limit of 100,000 requests.
 # Update
+- 23.6.16 Update to support custom api version, see the specific version on [ApiVersion](https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/reference).
 - 23.5.30 update apiVersion and improve response speed.
 - 23.5.2 Update support fot the embeddings interface, thanks to the amazing [Shuenhoy](https://github.com/Shuenhoy/deno-azure-openai-proxy)!
 - 23.4.27 Update support for setting the values of resourceName and mapper through environment variables, as well as support for one-click deployment.

@@ -15,6 +15,7 @@
 5. 支持mapper，可以自定义模型映射规则，也支持直接透传模型名
 6. 无需服务器，免费在线部署，每日10万次请求额度
 # 更新
+- 23.6.16 更新支持自定义api版本，具体版本见[ApiVersion](https://learn.microsoft.com/zh-cn/azure/cognitive-services/openai/reference)
 - 23.5.30 更新apiVersion并提升响应速度
 - 23.5.2 更新支持embeddings接口(感谢[Shuenhoy](https://github.com/Shuenhoy/deno-azure-openai-proxy))
 - 23.4.27 更新支持环境变量设置resourceName和mapper的值以及支持一键部署
