@@ -56,6 +56,7 @@ async function requestAzure(method: string, body: any, path: string, authKey?: s
     headers: {
       "Content-Type": "application/json",
       "api-key": authKey.replace('Bearer ', ''),
+      "X-Accel-Buffering": "no",
     },
     body: JSON.stringify(body),
   };
