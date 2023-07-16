@@ -22,13 +22,13 @@ async function handleRequest(request:Request):Promise<Response> {
     url.pathname = url.pathname.replace('/',"")
   }
   let path:string;
-  if (url.pathname === '/v1/chat/completions' || url.pathname === '/chat/completions') {
+  if (url.pathname === '/v1/chat/completions') {
     return handleDirect(request, "chat/completions");
-  } else if (url.pathname === '/v1/completions' || url.pathname === '/completions') {
+  } else if (url.pathname === '/v1/completions') {
     return handleDirect(request, "completions");
-  } else if (url.pathname === '/v1/models' || url.pathname === '/models') {
+  } else if (url.pathname === '/v1/models') {
     return handleModels(request)
-  } else if (url.pathname === '/v1/embeddings' || url.pathname === '/embeddings') {
+  } else if (url.pathname === '/v1/embeddings') {
     return handleEmbedding(request, "embeddings");
   } else {
     return new Response('404 Not Found', { status: 404 })
