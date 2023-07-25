@@ -8,6 +8,7 @@ const apiVersion:string = Deno.env.get("API_VERSION");
 // The mapping of model name.
 const mapper:any = {
   'gpt-3.5-turbo': Deno.env.get("DEPLOY_NAME_GPT35"),
+  'gpt-3.5-turbo-16k': Deno.env.get("DEPLOY_NAME_GPT35_16k"),
   'gpt-4': Deno.env.get("DEPLOY_NAME_GPT4") 
   // Other mapping rules can be added here.
 };
