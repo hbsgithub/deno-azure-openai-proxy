@@ -4,7 +4,7 @@ import { pooledMap } from "https://deno.land/std@0.182.0/async/pool.ts";
 // The name of your Azure OpenAI Resource.
 const resourceName:string = Deno.env.get("RESOURCE_NAME");
 // The version of OpenAI API.
-const apiVersion:string = "2023-05-15";
+const apiVersion:string = Deno.env.get("API_VERSION");
 // The mapping of model name.
 const mapper:any = {
   'gpt-3.5-turbo': Deno.env.get("DEPLOY_NAME_GPT35"),
@@ -15,6 +15,7 @@ const mapper:any = {
   'gpt-4-32k': Deno.env.get("DEPLOY_NAME_GPT4_32k"),
   'gpt-4-0613': Deno.env.get("DEPLOY_NAME_GPT4"),
   'gpt-4-1106-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'gpt-4-vision-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
   'dall-e-3': typeof Deno.env.get("DEPLOY_NAME_DALLE3") !== 'undefined' ? Deno.env.get("DEPLOY_NAME_DALLE3") : "dalle3",
   // Other mapping rules can be added here.
 };
