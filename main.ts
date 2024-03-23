@@ -8,9 +8,15 @@ const apiVersion:string = Deno.env.get("API_VERSION");
 // The mapping of model name.
 const mapper:any = {
   'gpt-3.5-turbo': Deno.env.get("DEPLOY_NAME_GPT35"),
+  'gpt-3.5-turbo-0613': Deno.env.get("DEPLOY_NAME_GPT35"),
+  'gpt-3.5-turbo-1106': Deno.env.get("DEPLOY_NAME_GPT35"),
   'gpt-3.5-turbo-16k': Deno.env.get("DEPLOY_NAME_GPT35_16k"),
   'gpt-4': Deno.env.get("DEPLOY_NAME_GPT4"),
   'gpt-4-32k': Deno.env.get("DEPLOY_NAME_GPT4_32k"),
+  'gpt-4-0613': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'gpt-4-1106-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'gpt-4-vision-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'dall-e-3': typeof Deno.env.get("DEPLOY_NAME_DALLE3") !== 'undefined' ? Deno.env.get("DEPLOY_NAME_DALLE3") : "dalle3",
   // Other mapping rules can be added here.
 };
 
@@ -26,14 +32,16 @@ async function handleRequest(request:Request):Promise<Response> {
   let path:string;
   if (url.pathname === '/v1/chat/completions') {
     return handleDirect(request, "chat/completions");
+  } else if (url.pathname === '/v1/images/generations') {
+    return handleDirect(request, "images/generations");
   } else if (url.pathname === '/v1/completions') {
     return handleDirect(request, "completions");
   } else if (url.pathname === '/v1/models') {
-    return handleModels(request)
+    return handleModels(request);
   } else if (url.pathname === '/v1/embeddings') {
     return handleEmbedding(request, "embeddings");
   } else {
-    return new Response('404 Not Found', { status: 404 })
+    return new Response('404 Not Found', { status: 404 });
   }
 }
 
