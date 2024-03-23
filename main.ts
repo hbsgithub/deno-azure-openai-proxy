@@ -15,7 +15,8 @@ const mapper:any = {
   'gpt-4-32k': Deno.env.get("DEPLOY_NAME_GPT4_32k"),
   'gpt-4-0613': Deno.env.get("DEPLOY_NAME_GPT4"),
   'gpt-4-1106-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
-  'gpt-4-vision-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'gpt-4-0125-preview': Deno.env.get("DEPLOY_NAME_GPT4"),
+  'gpt-4-vision-preview': Deno.env.get("DEPLOY_NAME_GPT4V"),
   'dall-e-3': typeof Deno.env.get("DEPLOY_NAME_DALLE3") !== 'undefined' ? Deno.env.get("DEPLOY_NAME_DALLE3") : "dalle3",
   // Other mapping rules can be added here.
 };
